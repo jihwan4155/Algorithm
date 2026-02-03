@@ -39,8 +39,8 @@ times = 0 # 콜 몇 번째인지 나타내는 변수
 for c in call:
     times += 1 # 콜 하나 순회마다 + 1
     for row in range(len(arr)): # 빙고판 이중 리스트 인덱스
-        
         # 여기서 len(arr) 나 5안하고 range(row) 돌려서 잘못된 접근으로 시간 낭비했음
+        
         if c in arr[row]: # 콜이 이중 리스트 안에 있다면 
             b = arr[row].index(c) # 해당 콜과 같은 값이 있는 인덱스 확인
             arr[row][b] = 0 # 해당 이중 리스트 내의 인덱스로 그 값 0 만들기
@@ -52,3 +52,4 @@ for c in call:
     if done: # all break
         print(times) # 몇 번째 콜인지 print
         break
+
