@@ -1,4 +1,3 @@
-
 def dfs(cnt, total):
     global ans
     global n
@@ -6,11 +5,11 @@ def dfs(cnt, total):
         if total < ans:
             ans = total
         return
+    if total > ans: # 가지치기
+        return
 
     for i in range(n):
         if used[i]:
-            continue
-        if total > ans:
             continue
         used[i] = 1
         dfs(cnt + 1, total + arr[cnt][i])
