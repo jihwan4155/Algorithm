@@ -1,6 +1,6 @@
 import heapq, math
 
-def dijkstra(v):
+def dijkstra(v, arr):
     distance = [math.inf] * (N+1)
     distance[v] = 0
     hq = [(0, v)]
@@ -11,7 +11,7 @@ def dijkstra(v):
         if v != X and node == X:
             break
         
-        for dis, next in graph[node]:
+        for dis, next in arr[node]:
             dist = weight + dis
             if dist < distance[next]:
                 heapq.heappush(hq, (dist, next))
@@ -22,18 +22,19 @@ T = int(input())
 for t in range(1, T+1):
     N, M, X = map(int, input().split())
     graph = [[] for _ in range(N+1)]
+    back_graph = [[] for _ in range(N+1)] # 돌아오는 것은 가는 거 반대
     for _ in range(M):
         x, y, c = map(int, input().split())
         graph[x].append((c, y)) # 거리, 도착 노드
+        back_graph[y].append((c, x)) 
     
-    from_x = dijkstra(X)
+    from_x = dijkstra(X, graph)
+    to_x = dijkstra(X, back_graph)
     ret = 0
     
     for i in range(1, N+1):
         if i == X:
             continue
-        to_x = dijkstra(i)
-        if to_x[X] + from_x[i] > ret:
-            ret = to_x[X] + from_x[i]
+        ret = max(ret, from_x[i] + to_x[i])
     
     print(f'#{t}', ret)
