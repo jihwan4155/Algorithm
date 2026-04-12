@@ -20,6 +20,11 @@ def connect(idx, dir, board):
 # 만약 1이나 2있으면 return
 def delta(index, line, con, grid):
     global length, c, core_num
+
+    if con + (core_num - index) < c:
+        return
+
+
     if index == core_num:
         if con > c:
             c = con
@@ -32,8 +37,9 @@ def delta(index, line, con, grid):
 
     for d in range(4):
         new_grid , le = connect((y, x), d, grid)
-        if new_grid:
-            delta(index+1, line+le, con+1, new_grid)
+        if new_grid is None:
+            continue
+        delta(index+1, line+le, con+1, new_grid)
 
     delta(index+1, line, con, grid)
 
@@ -61,3 +67,4 @@ for t in range(1, T+1):
     length, c = 0, 0 
     delta(0, 0, 0, visited)
     print(f'#{t}', length)
+    
