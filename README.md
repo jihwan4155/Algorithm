@@ -4,4 +4,4 @@ This is an auto push repository for Baekjoon Online Judge and SW Expert Academy
 created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
 <br />
 
-알고리즘 풀이(Baekjoon, SWEA, etc) 기록입니다.
+알고리즘 풀이(Baekjoon, SWEA, 프로그래머스 etc) 기록입니다.
