@@ -1,30 +1,30 @@
-def dfs(person):
-    stack = [person]
-    visited[person] = 1
+def find_set(x):
+    if par[x] == x:
+        return x
     
-    while stack:
-        p = stack.pop()
-        for w in node[p]:
-            if not visited[w]:
-                stack.append(w)
-                visited[w] = 1
+    return find_set(par[x])
+
+def union_set(x, y):
+    p1 = find_set(x)
+    p2 = find_set(y)
+
+    par[p2] = p1
+
 
 T = int(input())
 
-for t in range(1, T+1):
+for tc in range(1, T+1):
     n, m = map(int, input().split())
-    paper = list(map(int, input().split()))
-    node = [[] for _ in range(n+1)]
+    arr = list(map(int, input().split()))
+    par = [i for i in range(n+1)]
+
     for i in range(m):
-        x, y = paper[i*2], paper[i*2+1]
-        node[x].append(y)
-        node[y].append(x)
+        s1, s2 = arr[i*2], arr[i*2+1]
+        union_set(s1, s2)
     
-    cnt = 0
-    visited = [False] * (n+1)
+    ans = set()
     for i in range(1, n+1):
-        if not visited[i]:
-            dfs(i)
-            cnt += 1
+        a = find_set(i)
+        ans.add(a)
     
-    print(f'#{t}', cnt)
+    print(f'#{tc}', len(ans))
