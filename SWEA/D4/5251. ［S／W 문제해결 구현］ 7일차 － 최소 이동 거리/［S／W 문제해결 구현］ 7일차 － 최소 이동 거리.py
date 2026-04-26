@@ -1,29 +1,28 @@
-import heapq, math
+import heapq
 
-def dijkstra(v):
-    distance = [math.inf] * (n+1)
-    distance[v] = 0
-    hq = [(0, v)]
-    
+def dijkstra(start):
+    distance = [float('inf')] * (n+1)
+    hq = [(0, start)]
     while hq:
         weight, node = heapq.heappop(hq)
         if distance[node] < weight:
             continue
-        for dis, adj in road[node]:
-            dist = weight + dis
-            if dist < distance[adj]:
-                heapq.heappush(hq, (dist, adj))
-                distance[adj] = dist
-   
-    return distance
+        for dist, next in graph[node]:
+            d = dist + weight
+            if d < distance[next]:
+                heapq.heappush(hq, (d, next))
+                distance[next] = d
+    
+    return distance[n]
+
 
 T = int(input())
-for t in range(1, T+1):
-    n, e = map(int, input().split()) # n 노드, e 간선
-    road = [[] for _ in range(n+1)]
+for tc in range(1, T+1):
+    n, e = map(int, input().split())
+    graph = [[] for _ in range(n+1)]
     for i in range(e):
-        s, e, w = map(int, input().split())
-        road[s].append((w, e)) # 거리, 도착
+        s, end, w = map(int, input().split())
+        graph[s].append((w, end))
     
-    way = dijkstra(0)
-    print(f'#{t}', way[n])
+    ret = dijkstra(0)
+    print(f'#{tc} {ret}')
