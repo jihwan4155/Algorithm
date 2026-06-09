@@ -1,0 +1,27 @@
+T = int(input())
+dy = [0, 1, 0, -1]
+dx = [1, 0, -1, 0]
+for tc in range(1, T+1):
+    n = int(input())
+    arr = [[0] * n for _ in range(n)]
+    dir = 0
+    idx, idy = 0, 0
+
+    for i in range(1, n*n+1):
+        if i == 1:
+            arr[idy][idx] = i
+            continue
+        
+        ex_x = idx + dx[dir]
+        ex_y = idy + dy[dir]
+
+        if 0 > ex_x or n <= ex_x or 0 > ex_y or n <= ex_y or arr[ex_y][ex_x] != 0:
+            dir = (dir + 1) % 4
+
+        idx += dx[dir]
+        idy += dy[dir]
+        arr[idy][idx] = i
+    
+    print(f"#{tc}")
+    for row in arr:
+        print(*row)
