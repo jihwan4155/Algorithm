@@ -1,3 +1,5 @@
+// 문자열 두개를 주고 문자열1의 문자가 문자열2의 문자와 같은 개수 중 최대값
+
 package swea4865;
 
 import java.util.Scanner;
